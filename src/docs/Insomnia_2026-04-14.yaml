@@ -1,0 +1,399 @@
+type: collection.insomnia.rest/5.0
+schema_version: "5.1"
+name: My first collection
+meta:
+  id: wrk_a9e1e8e3f14b4677ba3d565ee9ca6afb
+  created: 1774964057239
+  modified: 1774964057239
+  description: ""
+collection:
+  - name: Categorias
+    meta:
+      id: fld_22e3af504e204521b6d88b2b3da900d4
+      created: 1775565478471
+      modified: 1775565478471
+      sortKey: -1775565478471
+      description: ""
+    children:
+      - url: localhost:8000/categorias/1
+        name: Deletar
+        meta:
+          id: req_0d1fedd31e9541af99fc5842706be8e9
+          created: 1775565523694
+          modified: 1775566561104
+          isPrivate: false
+          description: ""
+          sortKey: -1774961734480.25
+        method: DELETE
+        headers:
+          - name: User-Agent
+            value: insomnia/12.4.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: localhost:8000/categorias/4
+        name: Atualizar
+        meta:
+          id: req_78e633c73d6f42c9a58b65a6ce6903f3
+          created: 1775565532563
+          modified: 1775566495803
+          isPrivate: false
+          description: ""
+          sortKey: -1775263609538.125
+        method: PUT
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"nome": "Calças",
+            	"descricao": "Tamanho do 36 ao 50"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/12.4.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: localhost:8000/categorias
+        name: Criar
+        meta:
+          id: req_2f1b3e52f6ab4b81b0bf3ed9025dbe44
+          created: 1775565577514
+          modified: 1775566368804
+          isPrivate: false
+          description: ""
+          sortKey: -1775414547067.0625
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"nome": "Camisetas",
+            	"descricao": "Tamnhos do P ao GG"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/12.4.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: localhost:8000/categorias
+        name: Selecionar
+        meta:
+          id: req_6ee388a8b1474daa965c1169a31cee97
+          created: 1775566531151
+          modified: 1775566623708
+          isPrivate: false
+          description: ""
+          sortKey: -1775414547167.0625
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/12.4.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: Produtos
+    meta:
+      id: fld_0194353c879c4aff92ca5b7dc10a79f0
+      created: 1775566580520
+      modified: 1775566580520
+      sortKey: -1775566580520
+      description: ""
+    children:
+      - url: localhost:8000/produtos
+        name: Selecionar
+        meta:
+          id: req_b71a32af52a94884bd6111833dc2f23d
+          created: 1775581087708
+          modified: 1775581087708
+          isPrivate: false
+          description: ""
+          sortKey: -1775566604870
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/12.4.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: localhost:8000/produtos
+        name: Criar
+        meta:
+          id: req_69013b3014cc4b6fadbc16504cba6aa6
+          created: 1775581093066
+          modified: 1775581093066
+          isPrivate: false
+          description: ""
+          sortKey: -1775566604795
+        method: POST
+        body:
+          mimeType: multipart/form-data
+          params:
+            - name: idCategoria
+              value: "2"
+              description: ""
+              disabled: false
+            - name: nome
+              value: Nike Air Force
+              description: ""
+              disabled: false
+            - name: valor
+              value: "300.20"
+              description: ""
+              disabled: false
+            - name: vinculoImg
+              value: ""
+              description: ""
+              disabled: false
+              fileName: C:\Users\49102691850\Pictures\air force.jpg
+              type: file
+        headers:
+          - name: Content-Type
+            value: multipart/form-data
+          - name: User-Agent
+            value: insomnia/12.4.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: localhost:8000/produtos/2
+        name: Atualizar
+        meta:
+          id: req_deab435b308a4deea97d059c2320581c
+          created: 1775581097261
+          modified: 1775581097261
+          isPrivate: false
+          description: ""
+          sortKey: -1775566604745
+        method: PUT
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"idCategoria": 2,
+            	"nome": "Air Force",
+            	"valor": 500.99
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/12.4.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: localhost:8000/produtos/2
+        name: Deletar
+        meta:
+          id: req_269bbd7659ad411a892c670fe920cbe5
+          created: 1775581100741
+          modified: 1775581100741
+          isPrivate: false
+          description: ""
+          sortKey: -1775490575943.5312
+        method: DELETE
+        headers:
+          - name: User-Agent
+            value: insomnia/12.4.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: Clientes
+    meta:
+      id: fld_f8ed45a8495b4455a24b3827a56b673b
+      created: 1775581075521
+      modified: 1775581081221
+      sortKey: -1775581075521
+      description: ""
+    children:
+      - url: localhost:8000/clientes
+        name: Criar
+        meta:
+          id: req_d8b7dd2834dc44efa3325a881107184b
+          created: 1774964057253
+          modified: 1776190928977
+          isPrivate: false
+          description: ""
+          sortKey: -1776164014026
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"nome": "beatriz",
+            	"cpf": "49102691850",
+            	"telefone": ["11999999999"],
+            	"cep": "13170023",
+            	"numero": 300,
+            	"complemento": "Casa Amarela 002"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/12.4.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: localhost:8000/clientes
+        name: Selecionar
+        meta:
+          id: req_12c875e10d4d4cf183a2d7de32b9272e
+          created: 1775565510365
+          modified: 1776164018509
+          isPrivate: false
+          description: ""
+          sortKey: -1776164014126
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/12.4.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: localhost:8000/clientes/20
+        name: Atualizar
+        meta:
+          id: req_0ab8149553d443ee94b17719f28e94fa
+          created: 1775566412456
+          modified: 1776191042612
+          isPrivate: false
+          description: ""
+          sortKey: -1776164014226
+        method: PUT
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"nome": "aDanielly",
+            	"cpf": "49102691850",
+            	"telefone": ["19982094463"],
+            	"cep": "13170023",
+            	"numero": 300,
+            	"complemento": "Casa Amarela"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/12.4.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: localhost:8000/clientes/16
+        name: Deletar
+        meta:
+          id: req_c78e18caadef48f684f84f9aeef9b018
+          created: 1775566520418
+          modified: 1776189263850
+          isPrivate: false
+          description: ""
+          sortKey: -1776164014326
+        method: DELETE
+        headers:
+          - name: User-Agent
+            value: insomnia/12.4.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_c276b7d2c023c2f74cff92b666078b7fd9e76ae8
+    created: 1774964057246
+    modified: 1774964057246
+environments:
+  name: Base Environment
+  meta:
+    id: env_c276b7d2c023c2f74cff92b666078b7fd9e76ae8
+    created: 1774964057243
+    modified: 1774964057243
+    isPrivate: false

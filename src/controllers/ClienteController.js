@@ -29,9 +29,9 @@ const clienteController = {
 
             if (!validarCpf(cpf))
                 return res.status(400).json({ message: "CPF inválido" });
-            limparNumeros(numero);
+            // limparNumeros(numero);
 
-            const numeroLimpo = limparNumeros(numero);
+            // const numeroLimpo = limparNumeros(numero);
 
             const respApi = await axios.get(`https://viacep.com.br/ws/${cep}/json`)
             if (respApi.data.erro) {
@@ -47,7 +47,7 @@ const clienteController = {
             // criar objeto endereço
             const endereco = Endereco.criar({
                 cep: cep,
-                numero: numeroLimpo,
+                numero: numero,
                 complemento: complemento,
                 logradouro: respApi.data.logradouro,
                 bairro: respApi.data.bairro,
@@ -74,9 +74,6 @@ const clienteController = {
 
             if (!validarCpf(cpf))
                 return res.status(400).json({ message: "CPF inválido" });
-            limparNumeros(numero);
-
-            const numeroLimpo = limparNumeros(numero);
 
             let endereco = null;
 
@@ -90,7 +87,7 @@ const clienteController = {
                     bairro: resApi.data.bairro,
                     cidade: resApi.data.localidade,
                     uf: resApi.data.uf,
-                    numero: numeroLimpo,
+                    numero: numero,
                     complemento
                 };
             }
