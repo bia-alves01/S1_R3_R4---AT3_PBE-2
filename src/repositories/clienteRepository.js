@@ -1,59 +1,132 @@
 import { connection } from "../configs/Database.js";
 
 const clienteRepository = {
-    criar: async (cliente) => {
+    selecionar: async (idCliente) => {
+        const conn = await connection.getConnection();
         try {
-         // const connection = await pool.getConnection();
-            await connection.beginTransaction();
 
-            //Clientes        
-            const sqlCliente = 'INSERT INTO clientes (nome, cpf ) VALUES (?,?);';
-                    const valuesClientes = [cliente.nome, cliente.cpf ];
-                    const [rowsClientes] = await connection.execute(sqlCliente, valuesClientes);
+            const sql = `
+                SELECT 
+                    *
+                FROM clientes as c
+                INNER JOIN telefones AS t
+                    ON c.idCliente = t.idCliente
+                INNER JOIN enderecos AS e
+                    ON c.idCliente = e.idCliente;`;
 
-            const sqlEndereco = 'INSERT INTO enderecos (idCliente, logradouro, numero, complemento, bairro, cidade, uf, cep) VALUES (?, ?, ?, ?, ?, ?, ?, ?);';
-            const valuesEndereco = [rowsClientes.insertId, Endereco.logradouro, Endereco.numero, Endereco.complemento, Endereco.bairro, endereco.cidade, endereco.uf, endereco.cep];
-            const [rowsEnderecos] = await connection.execute(sqlEndereco, valuesEndereco);
+            const [rows] = await connection.execute(sql);
+            return rows;
 
-            const sqlTelefones = 'INSERT INTO telefones (idTelefone, idCliente, telefone '
-
-            connection.commit();
-            return {rowsClientes, rowsEnderecos, rowsTelefones
-            }
         } catch (error) {
-            connection.rollback()
-            throw error
+            throw error;
+        } finally {
+            conn.release();
         }
     },
+    criar: async (cliente, endereco, telefone) => {
+        const conn = await connection.getConnection();
+        try {
+            await conn.beginTransaction();
 
+            //Insert Clientes        
+            const sqlCliente = 'INSERT INTO clientes (nome, cpf ) VALUES (?,?);';
+            const valuesClientes = [cliente.nome, cliente.cpf];
+            const [rowsClientes] = await conn.execute(sqlCliente, valuesClientes);
+
+            //Insert Telefone
+            const sqlTelefone = 'INSERT INTO telefones (idCliente, telefone) VALUES (?,?);';
+            const valuesTelefone = [rowsClientes.insertId, telefone.telefone[0]];
+            const [rowsTelefone] = await conn.execute(sqlTelefone, valuesTelefone);
+
+            //Insert Endereço
+            const sqlEndereco = 'INSERT INTO enderecos (idCliente, logradouro, numero, complemento, bairro, cidade, uf, cep) VALUES (?, ?, ?, ?, ?, ?, ?, ?);';
+            const valuesEndereco = [rowsClientes.insertId, endereco.logradouro, endereco.numero, endereco.complemento, endereco.bairro, endereco.cidade, endereco.uf, endereco.cep];
+            const [rowsEnderecos] = await conn.execute(sqlEndereco, valuesEndereco);
+
+
+            await conn.commit();
+            return {
+                rowsClientes, rowsEnderecos, rowsTelefone
+            }
+        } catch (error) {
+            conn.rollback()
+            throw error
+        }
+        finally {
+            conn.release();
+        }
+    },
+    editar: async (cliente, endereco, telefone) => {
+        const conn = await connection.getConnection();
+        try {
+            await conn.beginTransaction();
+
+            const sqlCliente = 'UPDATE clientes SET nome=?, cpf=? WHERE idCliente=?';
+            await conn.execute(sqlCliente, [
+                cliente.nome ?? null,
+                cliente.cpf ?? null,
+                cliente.idCliente
+            ]);
+
+            const sqlTelefone = 'UPDATE telefones SET telefone=? WHERE idCliente=?';
+
+            //verifica se realmente existe antes de acessar 
+            const numeroTelefone = telefone?.telefone?.[0];
+
+            //Só atualizará se realmente tiver um número de telefone existente 
+            if (numeroTelefone) {
+                await conn.execute(sqlTelefone, [
+                    numeroTelefone,
+                    cliente.idCliente
+                ]);
+            }
+
+            if (endereco) {
+                const sqlEndereco = `UPDATE enderecos SET logradouro=?, numero=?, complemento=?, bairro=?, cidade=?, uf=?, cep=? WHERE idCliente=?
+            `;
+            //Atualiza o endereço e garante que nenhum valor seja undefined, evitando erro no MYSQL e possibilitando qualquer valor ser nulo(campos opcionais)
+                await conn.execute(sqlEndereco, [
+                    endereco.logradouro ?? null,
+                    endereco.numero ?? null,
+                    endereco.complemento ?? null,
+                    endereco.bairro ?? null,
+                    endereco.cidade ?? null,
+                    endereco.uf ?? null,
+                    endereco.cep ?? null,
+                    cliente.idCliente
+                ]);
+            }
+
+            await conn.commit();
+
+            return { message: 'Cliente atualizado com sucesso!' };
+
+        } catch (error) {
+            await conn.rollback();
+            throw error;
+        } finally {
+            conn.release();
+        }
+    },
+    deletar: async (idCliente) => {
+        const conn = await connection.getConnection();
+        try {
+            await conn.beginTransaction();
+
+            await conn.execute('DELETE FROM telefones WHERE idCliente = ?', [idCliente]);
+            await conn.execute('DELETE FROM enderecos WHERE idCliente = ?', [idCliente]);
+            await conn.execute('DELETE FROM clientes WHERE idCliente = ?', [idCliente]);
+
+            await conn.commit();
+            return { message: "Cliente deletado com sucesso!" };
+
+        } catch (error) {
+            await conn.rollback();
+            throw error;
+        } finally {
+            conn.release();
+        }
+    }
 }
-
-
-//     criar: async (cliente) => {
-        
-//         const sql = 'INSERT INTO clientes (idCliente, nome, cpf ) VALUES (?,?,?);';
-
-// const clienteRepository = {
-//     selecionar: async () => {
-//          const sql = 'SELECT * FROM clientes;';
-//          const [rows] = await connection.execute(sql);
-//          return rows;
-//     },
-//     editar: async (cliente) => {
-//         console.log(cliente.idCliente, cliente.nome, cliente.cpf);
-        
-//         const sql = 'UPDATE clientes SET idCliente=?, nome=?, cpf=? WHERE idCliente=?;';
-//         const values = [cliente.idCliente, cliente.nome, cliente.cpf];
-//         const [rows] = await connection.execute(sql, values);
-//         return rows;
-//     },
-//     deletar: async (id) => {
-//         const sql = 'DELETE FROM clientes WHERE Id = ?;';
-//         const values = [id];
-//         const [rows] = await connection.execute(sql, values);
-//         return rows;                                                         
-//     },           
-
-//}
 
 export default clienteRepository;

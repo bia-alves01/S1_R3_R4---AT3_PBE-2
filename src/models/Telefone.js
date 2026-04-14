@@ -1,33 +1,22 @@
-export class Endereco {
-    #idEndereco; 
-    #idCliente;  
-    #uf;  
-    #cep; 
-    #logradouro;  
-    #numero;  
-    #complemento;  
-    #cidade; 
-    #bairro; 
+export class Telefone {
+    #idTelefone;
+    #idCliente;
+    #telefone;
 
-    constructor(pIdEndereco, pIdCliente, pUf ,pCep, pLogradouro, pNumero, pComplemento ,pCidade, pBairro){
-        this.idEndereco = pIdEndereco;
+
+    constructor( pIdCliente, pTelefone, pIdTelefone){
+        this.idTelefone = pIdTelefone;
         this.idCliente = pIdCliente;
-        this.pUf = pUf;
-        this.cep = pCep;
-        this.logradouro = pLogradouro;
-        this.numero = pNumero;
-        this.complemento = pComplemento;
-        this.cidade = pCidade;
-        this.bairro = pBairro;
+        this.telefone = pTelefone;
     }
 
     //Métodos acessores - GETTERS e SETTERS
-    get idEndereco (){
-        return this.#idEndereco;
+    get idTelefone (){
+        return this.#idTelefone;
     }
-    set idEndereco(value){
-        this.#validarIdEndereco(value);
-        this.#idEndereco = value;
+    set idTelefone(value){
+        this.#validarIdTelefone(value);
+        this.#idTelefone = value;
     }
 
     get idCliente (){
@@ -39,56 +28,16 @@ export class Endereco {
         this.#idCliente = value;
     }
 
-    get uf(){
-        return this.#uf;
+    get telefone(){
+        return this.#telefone;
     }
-    set uf(value){        
-        this.#validarUf(value);
-        this.#uf = value;
-    }
-
-    get cep(){
-        return this.#cep;
-    }
-    set cep(value){        
-        this.#validarCep(value);
-        this.#cep = value;
-    }
-
-    get logradouro(){
-        return this.#logradouro;
-    }
-    set logradouro(value){        
-        this.#validarLogradouro(value);
-        this.#logradouro = value;
-    }
-
-    get numero(){
-        return this.#numero;
-    }
-    set numero(value){        
-        this.#validarNumero(value);
-        this.#numero = value;
-    }
-
-    get complemento(){
-        return this.#complemento;
-    }
-    set complemento(value){        
-        this.#validarComplemento(value);
-        this.#complemento = value;
-    }
-
-    get bairro(){
-        return this.#bairro;
-    }
-    set bairro(value){        
-        this.#validarBairro(value);
-        this.#bairro = value;
+    set telefone(value){        
+        this.#validarTelefone(value);
+        this.#telefone = value;
     }
 
     //Métodos auxiliares
-    #validarIdEndereco(value){
+    #validarIdTelefone(value){
         if(value && value <= 0){
             throw new Error('Verifique o Id informado');
         }
@@ -98,52 +47,17 @@ export class Endereco {
             throw new Error('Verifique o Id informado');
         }
     }
-
-    #validarUf(value) {
-        if (value.length !== 2) throw new Error("UF inválida");
-    }
-
-    #validarCep(value) {
-        if (!/^[0-9]{8}$/.test(value)) 
-        throw new Error("CEP inválido");
-    }
-
-    #validarLogradouro(value) {
-        if (!value) throw new Error("Logradouro obrigatório");
-    }
-
-    #validarNumero(value) {
+    #validarTelefone(value){
         if(!value || isNaN(value)){
-            throw new Error('O campo número é obrigatória e deve ser um número válido');
+            throw new Error('O campo telefone é obrigatória e deve ser um número válido');
         }
     }
 
-    #validarComplemento(value) {
-        // opcional
-    }
-
-    #validarBairro(value) {
-        if (!value) {
-        throw new Error("Bairro obrigatório");
-    }
-}
-    #validarNome(value){
-        if(!value || value.trim().length < 3 || value.trim().length > 45){
-            throw new Error('O campo nome é obrigatório e deve ter entre 3 e 45 caracteres');
-        }
-    }
-    #validarCpf(value){
-        if(!value || isNaN(value)){
-            throw new Error('O campo CPF é obrigatória e deve ser um número válido');
-        }
-    }
     // Criação de objetos utilizando o Design Pattern FACTORY METHOD
     static criar(dados){
-        console.log(dados.idEndereco, dados.nome, dados.cpf);
+        console.log( dados.idCliente, dados.telefone, dados.idTelefone );
         
-        return new Endereco(dados.idEndereco, dados.nome, dados.cpf, null);
+        return new Telefone( dados.idCliente, dados.telefone, null);
     }
-    // static alterar(dados, idEndereco){        
-    //     return new Endereco(dados.idEndereco, dados.nome, dados.cpf, null);
-    // }
+
 }
