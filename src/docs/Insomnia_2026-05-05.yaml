@@ -384,6 +384,210 @@ collection:
             send: true
             store: true
           rebuildPath: true
+  - name: Pedidos
+    meta:
+      id: fld_cb82dc71becd43ba9cda6e0a65a8c1c9
+      created: 1777392860056
+      modified: 1777392860056
+      sortKey: -1775573828020.5
+      description: ""
+    children:
+      - url: localhost:8000/pedidos
+        name: Criar
+        meta:
+          id: req_5ca47a166d454c76bf32ebafcf61016c
+          created: 1777392860056
+          modified: 1777989431936
+          isPrivate: false
+          description: ""
+          sortKey: -1776164014026
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"clienteId": 20,
+            	"itens":[
+            		{"produtoId":2, "quantidade": 2, "valorItem":"500.99" }
+            	]
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/12.4.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: localhost:8000/pedidos/2
+        name: Atualizar
+        meta:
+          id: req_5d574e244a0349febb99f189124c1a4b
+          created: 1777392860056
+          modified: 1777985871102
+          isPrivate: false
+          description: ""
+          sortKey: -1776164014226
+        method: PUT
+        body:
+          mimeType: application/json
+          text: |-
+            {
+                "quantidade": 5
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/12.4.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: localhost:8000/pedidos
+        name: Selecionar
+        meta:
+          id: req_914679cc8ce54315a225e9707cafce3b
+          created: 1777392860056
+          modified: 1777980962274
+          isPrivate: false
+          description: ""
+          sortKey: -1776164014126
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/12.4.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: localhost:8000/clientes/16
+        name: Deletar
+        meta:
+          id: req_d4e512f0bb4d45dfa14a2b1b1cedc369
+          created: 1777392860056
+          modified: 1777392860056
+          isPrivate: false
+          description: ""
+          sortKey: -1776164014326
+        method: DELETE
+        headers:
+          - name: User-Agent
+            value: insomnia/12.4.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8000/pedidos/13/itens/4
+        name: Deletar Itens
+        meta:
+          id: req_df5e5a7febc04689a3c375d046eeb054
+          created: 1777983774136
+          modified: 1777996758096
+          isPrivate: false
+          description: ""
+          sortKey: -1777983774136
+        method: DELETE
+        headers:
+          - name: User-Agent
+            value: insomnia/12.5.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: localhost:8000/pedidos/13/itens/4
+        name: Atualizar Item
+        meta:
+          id: req_37cea82534ff4fda8475da05635d9c35
+          created: 1777997163963
+          modified: 1777997188424
+          isPrivate: false
+          description: ""
+          sortKey: -1776164014176
+        method: PUT
+        body:
+          mimeType: application/json
+          text: |-
+            {
+                "quantidade": 5
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/12.4.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: localhost:8000/pedidos/13/status
+        name: Atualizar Status
+        meta:
+          id: req_b90658b4ea3f4bafa8a8fd48b8ab6a7a
+          created: 1777997937064
+          modified: 1777998538004
+          isPrivate: false
+          description: ""
+          sortKey: -1776164014201
+        method: PUT
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "status": "Aberto"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/12.4.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
 cookieJar:
   name: Default Jar
   meta:
