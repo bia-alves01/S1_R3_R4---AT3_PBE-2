@@ -3,9 +3,11 @@ const routes = Router();
 import categoriaRoutes from "./categoriaRoutes.js";
 import produtoRoutes from "./produtoRoutes.js";
 import clienteRoutes from "./clienteRoutes.js";
+import pedidosRoutes from "./pedidoRoutes.js";
 
 routes.use('/categorias', categoriaRoutes);
 routes.use('/produtos', produtoRoutes);
-routes.use('/clientes', clienteRoutes)
+routes.use('/clientes', clienteRoutes);
+routes.use('/pedidos', pedidosRoutes);
 
 export default routes;
