@@ -10,3 +10,4 @@ produtoRoutes.put('/:id', produtoController.editar);
 produtoRoutes.delete('/:id', produtoController.deletar);
 
 export default produtoRoutes;
+
